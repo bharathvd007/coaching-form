@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Build Your Brand — Bharath VD</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --royal: #1547D4;
+  --royal-dark: #0e35a4;
+  --royal-glow: rgba(21,71,212,0.15);
+  --black: #080810;
+  --white: #ffffff;
+  --off: #f5f6f8;
+  --muted: #7a8093;
+  --border: #e4e6ec;
+  --success: #10b981;
+  --wa: #25D366;
+  --wa-dark: #1db954;
+  --r: 14px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--off);
+  min-height: 100vh;
+  color: var(--black);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---- PROGRESS ---- */
+.progress-track {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--border);
+  z-index: 200;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--royal), #4f8ef7);
+  transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+  width: 0%;
+}
+
+/* ---- HEADER ---- */
+.topbar {
+  position: fixed;
+  top: 3px; left: 0; right: 0;
+  height: 58px;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  z-index: 100;
+}
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.avatar {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: var(--royal);
+  color: white;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.topbar-name {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--black);
+}
+.topbar-tag {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--royal);
+  background: var(--royal-glow);
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+.step-dots {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--border);
+  transition: all 0.3s;
+}
+.dot.done { background: var(--royal); opacity: 0.4; }
+.dot.active { background: var(--royal); width: 18px; border-radius: 4px; }
+
+/* ---- MAIN ---- */
+main {
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 80px 20px 80px;
+}
+.wrap {
+  width: 100%;
+  max-width: 560px;
+}
+
+/* ---- STEPS ---- */
+.step { display: none; }
+.step.active {
+  display: block;
+  animation: rise 0.45s cubic-bezier(0.22,1,0.36,1) forwards;
+}
+@keyframes rise {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- INTRO CARD (step 1 hero) ---- */
+.hero-card {
+  background: var(--royal);
+  border-radius: 20px;
+  padding: 32px 28px 28px;
+  margin-bottom: 24px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-card::before {
+  content: '';
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 160px; height: 160px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.07);
+}
+.hero-card::after {
+  content: '';
+  position: absolute;
+  bottom: -30px; left: 20px;
+  width: 100px; height: 100px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.05);
+}
+.hero-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 10px;
+}
+.hero-headline {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(36px, 8vw, 54px);
+  line-height: 0.95;
+  color: white;
+  letter-spacing: 0.5px;
+  margin-bottom: 14px;
+}
+.hero-sub {
+  font-size: 14px;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.6;
+  max-width: 380px;
+}
+.hero-stats {
+  display: flex;
+  gap: 20px;
+  margin-top: 22px;
+  flex-wrap: wrap;
+}
+.stat {
+  display: flex;
+  flex-direction: column;
+}
+.stat strong {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  color: white;
+  letter-spacing: 0.5px;
+  line-height: 1;
+}
+.stat span {
+  font-size: 11px;
+  color: rgba(255,255,255,0.55);
+  margin-top: 2px;
+}
+
+/* ---- STEP LABELS ---- */
+.step-tag {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--royal);
+  margin-bottom: 6px;
+}
+.step-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(28px, 6vw, 42px);
+  line-height: 1.05;
+  color: var(--black);
+  margin-bottom: 6px;
+  letter-spacing: 0.3px;
+}
+.step-desc {
+  font-size: 14.5px;
+  color: var(--muted);
+  margin-bottom: 28px;
+  line-height: 1.6;
+}
+
+/* ---- OPTION CARDS ---- */
+.opts { display: grid; gap: 10px; margin-bottom: 28px; }
+.opts.two { grid-template-columns: 1fr 1fr; }
+
+.opt {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r);
+  padding: 14px 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+  user-select: none;
+  position: relative;
+}
+.opt:hover {
+  border-color: var(--royal);
+  box-shadow: 0 3px 14px var(--royal-glow);
+  transform: translateY(-1px);
+}
+.opt.sel {
+  border-color: var(--royal);
+  background: #f0f4ff;
+}
+.opt.sel .ocheck { background: var(--royal); border-color: var(--royal); }
+.opt.sel .ocheck::after { display: block; }
+.ocheck {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  flex-shrink: 0;
+  margin-top: 2px;
+  position: relative;
+  transition: all 0.18s;
+}
+.ocheck.square { border-radius: 5px; }
+.ocheck::after {
+  content: '';
+  display: none;
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: white;
+}
+.ocheck.square::after { border-radius: 2px; }
+.oem { font-size: 18px; flex-shrink: 0; line-height: 1; }
+.otxt strong {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--black);
+  margin-bottom: 1px;
+}
+.otxt span { font-size: 12px; color: var(--muted); line-height: 1.4; }
+
+/* ---- INPUTS ---- */
+.field { margin-bottom: 18px; }
+.field label {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--black);
+  margin-bottom: 7px;
+  letter-spacing: 0.2px;
+}
+.field input,
+.field textarea,
+.field select {
+  width: 100%;
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  padding: 13px 15px;
+  font-size: 15px;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--black);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  -webkit-appearance: none;
+}
+.field input:focus,
+.field textarea:focus { border-color: var(--royal); box-shadow: 0 0 0 3px var(--royal-glow); }
+.field textarea { min-height: 100px; resize: vertical; line-height: 1.6; }
+.field .hint { font-size: 12px; color: var(--muted); margin-top: 5px; }
+.phone-row { display: flex; gap: 8px; }
+.prefix {
+  flex-shrink: 0;
+  display: flex; align-items: center; gap: 6px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  padding: 13px 13px;
+  background: var(--white);
+  font-size: 15px; font-weight: 500;
+  white-space: nowrap;
+}
+
+/* ---- INFO BOX ---- */
+.infobox {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 15px 17px;
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.infobox .iem { font-size: 22px; flex-shrink: 0; }
+.infobox strong { font-size: 13px; font-weight: 600; color: var(--black); display: block; margin-bottom: 3px; }
+.infobox p { font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+
+/* ---- INCOME PILLS ---- */
+.income-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 28px;
+}
+.income-pill {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.income-pill:hover { border-color: var(--royal); }
+.income-pill.sel { border-color: var(--royal); background: #f0f4ff; }
+.income-pill strong { display: block; font-size: 14px; font-weight: 700; color: var(--black); }
+.income-pill span { font-size: 11px; color: var(--muted); margin-top: 2px; display: block; }
+
+/* ---- BUTTONS ---- */
+.btn {
+  width: 100%;
+  border: none;
+  border-radius: 12px;
+  padding: 15px 22px;
+  font-size: 15.5px;
+  font-weight: 600;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+.btn-blue {
+  background: var(--royal);
+  color: white;
+}
+.btn-blue:hover {
+  background: var(--royal-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(21,71,212,0.28);
+}
+.btn-ghost {
+  background: transparent;
+  border: 1.5px solid var(--border);
+  color: var(--muted);
+  margin-top: 10px;
+  font-size: 14px;
+}
+.btn-ghost:hover { border-color: var(--black); color: var(--black); }
+.btn-wa {
+  background: var(--wa);
+  color: white;
+  font-size: 16px;
+  padding: 16px 24px;
+  border-radius: 14px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  transition: all 0.2s;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+.btn-wa:hover {
+  background: var(--wa-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(37,211,102,0.3);
+}
+
+/* ---- URGENCY STRIP ---- */
+.urgency {
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  border-radius: 10px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  font-size: 13px;
+  color: #9a3412;
+  font-weight: 500;
+}
+
+/* ---- THANK YOU ---- */
+.ty {
+  text-align: center;
+  padding: 20px 10px 40px;
+}
+.ty-icon {
+  font-size: 64px;
+  display: block;
+  margin-bottom: 16px;
+  animation: popIn 0.6s cubic-bezier(0.34,1.56,0.64,1) forwards;
+}
+@keyframes popIn {
+  from { transform: scale(0) rotate(-10deg); opacity: 0; }
+  to { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+.ty h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 44px;
+  color: var(--black);
+  margin-bottom: 10px;
+  letter-spacing: 0.5px;
+}
+.ty p {
+  font-size: 15px;
+  color: var(--muted);
+  max-width: 360px;
+  margin: 0 auto 28px;
+  line-height: 1.65;
+}
+.ty-steps {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 20px;
+  text-align: left;
+  margin-bottom: 24px;
+}
+.ty-step-row {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 8px 0;
+}
+.ty-step-row:not(:last-child) { border-bottom: 1px solid var(--border); }
+.ty-num {
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: var(--royal);
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.ty-step-row strong { font-size: 13.5px; font-weight: 600; display: block; margin-bottom: 2px; }
+.ty-step-row span { font-size: 12px; color: var(--muted); line-height: 1.4; }
+.ty-note { font-size: 12px; color: var(--muted); margin-top: 14px; }
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 480px) {
+  .opts.two { grid-template-columns: 1fr; }
+  .income-grid { grid-template-columns: 1fr 1fr; }
+  main { padding: 76px 16px 60px; }
+  .topbar { padding: 0 16px; }
+  .hero-stats { gap: 16px; }
+}
+
+/* ---- WA ACTION BOX ---- */
+.wa-action-box {
+  background: #f0fff4;
+  border: 2px solid var(--wa);
+  border-radius: 16px;
+  padding: 24px 20px 20px;
+  margin-bottom: 8px;
+}
+.wa-action-inner {
+  margin-bottom: 16px;
+}
+.wa-action-inner strong {
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--black);
+  margin-bottom: 6px;
+}
+.wa-action-inner p {
+  font-size: 13.5px;
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 0;
+}
+.btn-wa-submit {
+  width: 100%;
+  background: var(--wa);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 16px 22px;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.2s ease;
+  letter-spacing: 0.2px;
+}
+.btn-wa-submit:hover {
+  background: var(--wa-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(37,211,102,0.35);
+}
+</style>
+</head>
+<body>
+
+<div class="progress-track"><div class="progress-fill" id="pFill"></div></div>
+
+<header class="topbar">
+  <div class="topbar-left">
+    <div class="avatar">BV</div>
+    <span class="topbar-name">Bharath VD</span>
+    <span class="topbar-tag">Personal Brand Coach</span>
+  </div>
+  <div class="step-dots" id="dotRow"></div>
+</header>
+
+<main>
+<div class="wrap">
+
+  <!-- STEP 1: Who are you -->
+  <div class="step active" id="s1">
+    <div class="hero-card">
+      <div class="hero-label">Personal Brand Coaching</div>
+      <div class="hero-headline">Ready to build<br>your brand?</div>
+      <div class="hero-sub">I help creators, founders and professionals turn attention into real income. Tell me about yourself — takes 2 minutes.</div>
+      <div class="hero-stats">
+        <div class="stat"><strong>10M+</strong><span>Views in 60 days</span></div>
+        <div class="stat"><strong>700+</strong><span>Reels created</span></div>
+        <div class="stat"><strong>13+</strong><span>People coached</span></div>
+      </div>
+    </div>
+
+    <div class="step-tag">Step 1 of 6</div>
+    <div class="step-title">Who are you?</div>
+    <div class="step-desc">This helps me give you the right advice. Pick the one that fits best.</div>
+
+    <div class="opts">
+      <div class="opt" onclick="pick(this,'who','creator')">
+        <div class="ocheck"></div>
+        <div class="oem">🎬</div>
+        <div class="otxt"><strong>Content Creator</strong><span>Making reels, videos or posts and want to grow + monetize</span></div>
+      </div>
+      <div class="opt" onclick="pick(this,'who','founder')">
+        <div class="ocheck"></div>
+        <div class="oem">🚀</div>
+        <div class="otxt"><strong>Founder / Business Owner</strong><span>Have a business and want a personal brand to get leads</span></div>
+      </div>
+      <div class="opt" onclick="pick(this,'who','professional')">
+        <div class="ocheck"></div>
+        <div class="oem">💼</div>
+        <div class="otxt"><strong>Professional / Expert</strong><span>Doctor, coach, professor, consultant — want to build authority online</span></div>
+      </div>
+      <div class="opt" onclick="pick(this,'who','aspiring')">
+        <div class="ocheck"></div>
+        <div class="oem">🌱</div>
+        <div class="otxt"><strong>Just starting out</strong><span>Haven't started yet but want to build something real</span></div>
+      </div>
+    </div>
+
+    <button class="btn btn-blue" onclick="go(1)">Let's go <span>→</span></button>
+  </div>
+
+  <!-- STEP 2: Biggest problem -->
+  <div class="step" id="s2">
+    <div class="step-tag">Step 2 of 6</div>
+    <div class="step-title">What's actually<br>stopping you?</div>
+    <div class="step-desc">Pick everything that's real for you right now. Be honest — this is where we start.</div>
+
+    <div class="opts" id="probOpts">
+      <div class="opt" onclick="multi(this,'problems','consistency')">
+        <div class="ocheck square"></div>
+        <div class="oem">⏰</div>
+        <div class="otxt"><strong>Can't stay consistent</strong><span>I start, disappear, then feel guilty about it</span></div>
+      </div>
+      <div class="opt" onclick="multi(this,'problems','ideas')">
+        <div class="ocheck square"></div>
+        <div class="oem">💡</div>
+        <div class="otxt"><strong>No content ideas</strong><span>Blank screen every time I try to post something</span></div>
+      </div>
+      <div class="opt" onclick="multi(this,'problems','mindset')">
+        <div class="ocheck square"></div>
+        <div class="oem">🧠</div>
+        <div class="otxt"><strong>Mindset is the block</strong><span>"Who am I to do this?" — fear, judgment, self-doubt</span></div>
+      </div>
+      <div class="opt" onclick="multi(this,'problems','monetization')">
+        <div class="ocheck square"></div>
+        <div class="oem">💰</div>
+        <div class="otxt"><strong>No monetization plan</strong><span>Getting views but zero income from it</span></div>
+      </div>
+      <div class="opt" onclick="multi(this,'problems','reach')">
+        <div class="ocheck square"></div>
+        <div class="oem">📉</div>
+        <div class="otxt"><strong>Reach is dead</strong><span>Posting regularly but nobody is watching</span></div>
+      </div>
+      <div class="opt" onclick="multi(this,'problems','identity')">
+        <div class="ocheck square"></div>
+        <div class="oem">🎯</div>
+        <div class="otxt"><strong>No clear brand identity</strong><span>Don't know my niche, my angle, what I stand for</span></div>
+      </div>
+      <div class="opt" onclick="multi(this,'problems','time')">
+        <div class="ocheck square"></div>
+        <div class="oem">📅</div>
+        <div class="otxt"><strong>No time or system</strong><span>Busy life — need a faster, smarter content workflow</span></div>
+      </div>
+    </div>
+
+    <button class="btn btn-blue" onclick="go(2)">Continue <span>→</span></button>
+    <button class="btn btn-ghost" onclick="back(2)">← Back</button>
+  </div>
+
+  <!-- STEP 3: Income + urgency (silent qualifier) -->
+  <div class="step" id="s3">
+    <div class="step-tag">Step 3 of 6</div>
+    <div class="step-title">A couple of<br>quick things</div>
+    <div class="step-desc">This helps me understand where you are and how I can help you best.</div>
+
+    <div class="field">
+      <label>What is your current monthly income? (from any source)</label>
+      <div class="income-grid" id="incomeGrid">
+        <div class="income-pill" onclick="pickIncome(this,'below1')"><strong>Below ₹50K</strong><span>Early stage</span></div>
+        <div class="income-pill" onclick="pickIncome(this,'50k_1l')"><strong>₹50K – ₹1L</strong><span>Building up</span></div>
+        <div class="income-pill" onclick="pickIncome(this,'1l_3l')"><strong>₹1L – ₹3L</strong><span>Growing</span></div>
+        <div class="income-pill" onclick="pickIncome(this,'3lplus')"><strong>₹3L+</strong><span>Ready to scale</span></div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>How soon do you want to start building your brand?</label>
+      <div class="opts" id="urgencyOpts" style="margin-bottom:0">
+        <div class="opt" onclick="pick(this,'urgency','now')">
+          <div class="ocheck"></div>
+          <div class="oem">🔥</div>
+          <div class="otxt"><strong>Right now</strong><span>I am ready, just need the right guidance</span></div>
+        </div>
+        <div class="opt" onclick="pick(this,'urgency','week')">
+          <div class="ocheck"></div>
+          <div class="oem">📆</div>
+          <div class="otxt"><strong>This week or next</strong><span>Getting my things together first</span></div>
+        </div>
+        <div class="opt" onclick="pick(this,'urgency','exploring')">
+          <div class="ocheck"></div>
+          <div class="oem">👀</div>
+          <div class="otxt"><strong>Just exploring for now</strong><span>Doing research before I commit</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:24px">
+      <button class="btn btn-blue" onclick="go(3)">Continue <span>→</span></button>
+      <button class="btn btn-ghost" onclick="back(3)">← Back</button>
+    </div>
+  </div>
+
+  <!-- STEP 4: Contact -->
+  <div class="step" id="s4">
+    <div class="step-tag">Step 4 of 6</div>
+    <div class="step-title">How do I<br>reach you?</div>
+    <div class="step-desc">I personally read every form and reach out on WhatsApp. No team, no bot — just me.</div>
+
+    <div class="infobox">
+      <div class="iem">💬</div>
+      <div>
+        <strong>WhatsApp first, always</strong>
+        <p>I will personally check your profile, review your answers, and message you directly within 24 hours. Short chat, no pressure.</p>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Your full name</label>
+      <input type="text" id="fname" placeholder="Eg: Rajesh Kumar" />
+    </div>
+    <div class="field">
+      <label>WhatsApp number</label>
+      <div class="phone-row">
+        <div class="prefix">🇮🇳 +91</div>
+        <input type="tel" id="fphone" placeholder="98765 43210" maxlength="10" style="flex:1" />
+      </div>
+      <div class="hint">This is where I will message you personally</div>
+    </div>
+    <div class="field">
+      <label>Instagram handle <span style="font-weight:400;color:var(--muted)">(or LinkedIn / website)</span></label>
+      <input type="text" id="fsocial" placeholder="@yourhandle or linkedin.com/in/you" />
+      <div class="hint">So I can check your content or profile before we talk</div>
+    </div>
+    <div class="field">
+      <label>What do you do? Business or niche <span style="font-weight:400;color:var(--muted)">(optional)</span></label>
+      <input type="text" id="fniche" placeholder="Eg: Fitness coach, SaaS founder, CA, interior designer..." />
+    </div>
+
+    <button class="btn btn-blue" onclick="go(4)">Continue <span>→</span></button>
+    <button class="btn btn-ghost" onclick="back(4)">← Back</button>
+  </div>
+
+  <!-- STEP 5: Big goal -->
+  <div class="step" id="s5">
+    <div class="step-tag">Step 5 of 6</div>
+    <div class="step-title">What does<br>winning look like?</div>
+    <div class="step-desc">Paint me a picture. The more specific, the better I can help you get there.</div>
+
+    <div class="field">
+      <label>6 months from now — what does your personal brand look like?</label>
+      <textarea id="fgoal" placeholder="Eg: I have 20K followers on Instagram, posting 4x a week, getting 2-3 inbound leads every month from my content, and earning at least ₹50K just from my brand..."></textarea>
+      <div class="hint">No wrong answers. Be real with yourself.</div>
+    </div>
+
+    <div class="urgency">
+      <span>⚡</span>
+      <span>I take on limited coaching clients every month — fill this seriously so I can prioritize your application.</span>
+    </div>
+
+    <div class="field" style="margin-bottom:0">
+      <label>Last thing — are you actually ready to put in the work?</label>
+      <div class="opts" id="commitOpts" style="margin-bottom:0;margin-top:10px">
+        <div class="opt" onclick="pick(this,'commit','yes')">
+          <div class="ocheck"></div>
+          <div class="oem">🔥</div>
+          <div class="otxt"><strong>100% Yes</strong><span>I am serious, I will show up and do the work</span></div>
+        </div>
+        <div class="opt" onclick="pick(this,'commit','mostly')">
+          <div class="ocheck"></div>
+          <div class="oem">🤔</div>
+          <div class="otxt"><strong>Mostly yes</strong><span>I want to, but consistency has been a challenge</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:24px">
+      <button class="btn btn-wa-submit" onclick="go(5)">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" fill="white"/></svg>
+  Submit on WhatsApp Now
+</button>
+<p style="text-align:center;font-size:12px;color:var(--muted);margin-top:10px;">WhatsApp will open with your details pre-filled. Just hit Send.</p>
+      <button class="btn btn-ghost" onclick="back(5)">← Back</button>
+    </div>
+  </div>
+
+  <!-- STEP 6: Thank you -->
+  <div class="step" id="s6">
+    <div class="ty">
+      <span class="ty-icon">✅</span>
+      <h2>One Last Step!</h2>
+      <p>Your details are ready. <strong>Click the button below to send them to me on WhatsApp.</strong> I will only receive your application once you hit Send.</p>
+
+      <div class="wa-action-box">
+        <div class="wa-action-inner">
+          <div style="font-size:32px;margin-bottom:8px;">📲</div>
+          <strong>Your application is ready to send</strong>
+          <p>WhatsApp will open with everything pre-filled.<br>Just hit <strong>Send</strong> and I will receive it instantly.</p>
+        </div>
+        <button class="btn-wa" id="finalWaBtn">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" fill="white"/></svg>
+          Send My Application on WhatsApp
+        </button>
+        <p style="font-size:11px;color:var(--muted);margin-top:10px;">Tap Send in WhatsApp after it opens. That is how I receive your details.</p>
+      </div>
+
+      <div class="ty-steps" style="margin-top:24px;">
+        <div class="ty-step-row">
+          <div class="ty-num">1</div>
+          <div>
+            <strong>You send on WhatsApp</strong>
+            <span>Your full details arrive directly in my inbox</span>
+          </div>
+        </div>
+        <div class="ty-step-row">
+          <div class="ty-num">2</div>
+          <div>
+            <strong>I review and check your profile</strong>
+            <span>I personally look at your content before replying</span>
+          </div>
+        </div>
+        <div class="ty-step-row">
+          <div class="ty-num">3</div>
+          <div>
+            <strong>I reply within 24 hours</strong>
+            <span>Real conversation, no scripts, no pressure</span>
+          </div>
+        </div>
+        <div class="ty-step-row">
+          <div class="ty-num">4</div>
+          <div>
+            <strong>We decide if it is a fit</strong>
+            <span>If yes we start. If not, I still give you something useful</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</main>
+
+<script>
+const TOTAL = 6;
+let cur = 1;
+const fd = { who:'', problems:[], income:'', urgency:'', commit:'' };
+
+function buildDots() {
+  const row = document.getElementById('dotRow');
+  row.innerHTML = '';
+  for (let i = 1; i <= TOTAL; i++) {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i < cur ? ' done' : i === cur ? ' active' : '');
+    row.appendChild(d);
+  }
+}
+
+function setProgress(n) {
+  document.getElementById('pFill').style.width = ((n-1)/(TOTAL-1)*100) + '%';
+}
+
+function showStep(n) {
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  document.getElementById('s'+n).classList.add('active');
+  if (n === 6) setTimeout(setupFinalBtn, 100);
+  cur = n;
+  buildDots();
+  setProgress(n);
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function pick(el, key, val) {
+  const parent = el.closest('.opts') || el.parentElement;
+  parent.querySelectorAll('.opt').forEach(o => o.classList.remove('sel'));
+  el.classList.add('sel');
+  fd[key] = val;
+}
+
+function multi(el, key, val) {
+  el.classList.toggle('sel');
+  if (!Array.isArray(fd[key])) fd[key] = [];
+  if (el.classList.contains('sel')) fd[key].push(val);
+  else fd[key] = fd[key].filter(v => v !== val);
+}
+
+function pickIncome(el, val) {
+  document.querySelectorAll('.income-pill').forEach(p => p.classList.remove('sel'));
+  el.classList.add('sel');
+  fd.income = val;
+}
+
+function go(from) {
+  if (from === 1 && !fd.who) return alert('Please pick one to continue.');
+  if (from === 2 && fd.problems.length === 0) return alert('Pick at least one challenge.');
+  if (from === 3 && (!fd.income || !fd.urgency)) return alert('Please answer both questions.');
+  if (from === 4) {
+    const n = document.getElementById('fname').value.trim();
+    const p = document.getElementById('fphone').value.trim();
+    if (!n) return alert('Please enter your name.');
+    if (p.length < 10) return alert('Enter a valid 10-digit WhatsApp number.');
+    fd.name = n; fd.phone = p;
+    fd.social = document.getElementById('fsocial').value.trim();
+    fd.niche = document.getElementById('fniche').value.trim();
+  }
+  if (from === 5) {
+    const g = document.getElementById('fgoal').value.trim();
+    if (!g) return alert('Please share your goal!');
+    if (!fd.commit) return alert('Please answer the commitment question.');
+    fd.goal = g;
+
+    const whoMap = { creator: 'Content Creator', founder: 'Founder / Business Owner', professional: 'Professional / Expert', aspiring: 'Just starting out' };
+    const incomeMap = { below1: 'Below Rs 50K', '50k_1l': 'Rs 50K - Rs 1L', '1l_3l': 'Rs 1L - Rs 3L', '3lplus': 'Rs 3L+' };
+    const urgencyMap = { now: 'Right now', week: 'This week or next', exploring: 'Just exploring' };
+    const commitMap = { yes: '100% Yes - serious and ready', mostly: 'Mostly yes - working on consistency' };
+
+    const msg = `Hi Bharath! I just filled your brand coaching form. Here are my details:
+
+Name: ${fd.name}
+WhatsApp: +91${fd.phone}
+Instagram/LinkedIn: ${fd.social || 'Not provided'}
+What I do: ${fd.niche || 'Not provided'}
+
+I am a: ${whoMap[fd.who] || fd.who}
+
+What is stopping me:
+${fd.problems.map(p => '- ' + p).join('\n')}
+
+Monthly income: ${incomeMap[fd.income] || fd.income}
+Ready to start: ${urgencyMap[fd.urgency] || fd.urgency}
+
+My 6-month goal:
+${fd.goal}
+
+Commitment: ${commitMap[fd.commit] || fd.commit}
+
+Looking forward to connecting!`;
+
+    const waURL = 'https://wa.me/917619397068?text=' + encodeURIComponent(msg);
+    window.open(waURL, '_blank');
+  }
+  showStep(from + 1);
+}
+
+function back(from) { showStep(from - 1); }
+
+function setupFinalBtn() {
+  const btn = document.getElementById('finalWaBtn');
+  if (!btn) return;
+  btn.onclick = function() {
+    const whoMap = { creator: 'Content Creator', founder: 'Founder / Business Owner', professional: 'Professional / Expert', aspiring: 'Just starting out' };
+    const incomeMap = { below1: 'Below Rs 50K', '50k_1l': 'Rs 50K - Rs 1L', '1l_3l': 'Rs 1L - Rs 3L', '3lplus': 'Rs 3L+' };
+    const urgencyMap = { now: 'Right now', week: 'This week or next', exploring: 'Just exploring' };
+    const commitMap = { yes: '100% Yes - serious and ready', mostly: 'Mostly yes - working on consistency' };
+    const msg = `Hi Bharath! Here is my brand coaching application:
+
+Name: ${fd.name}
+WhatsApp: +91${fd.phone}
+Instagram/LinkedIn: ${fd.social || 'Not provided'}
+What I do: ${fd.niche || 'Not provided'}
+
+I am a: ${whoMap[fd.who] || fd.who}
+
+What is stopping me:
+${fd.problems.map(p => '- ' + p).join('\n')}
+
+Monthly income: ${incomeMap[fd.income] || fd.income}
+Ready to start: ${urgencyMap[fd.urgency] || fd.urgency}
+
+My 6-month goal:
+${fd.goal}
+
+Commitment: ${commitMap[fd.commit] || fd.commit}
+
+Looking forward to connecting!`;
+    window.open('https://wa.me/917619397068?text=' + encodeURIComponent(msg), '_blank');
+  };
+}
+
+buildDots();
+setProgress(1);
+</script>
+</body>
+</html>
